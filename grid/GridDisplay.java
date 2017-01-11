@@ -49,7 +49,6 @@ public class GridDisplay {
 		ActionListener listener = new ActionListener() {
 			  public void actionPerformed(ActionEvent e)
 			  {
-			    System.out.println("pressed");
 			    System.out.println(FinishedPuzzleChecker.checkFull(listOfFields));
 			  }
 			};
