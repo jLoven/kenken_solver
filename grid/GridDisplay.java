@@ -23,7 +23,7 @@ public class GridDisplay {
 		frame.add(text);
 		return text;
 	}
-	
+
 	public static JFrame generateFrame(int xCorner, int yCorner, int xSize, int ySize) {
 		JFrame frame = new JFrame();
 		frame.setLocation(xCorner, yCorner);
@@ -32,7 +32,7 @@ public class GridDisplay {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		return frame;
 	}
-	
+
 	public static JTextField[][] makeGridDisplay() {
 		int buttonLength = 150;
 		int buttonHeight = 50;
@@ -44,27 +44,28 @@ public class GridDisplay {
 				listOfFields[i][j] = field;
 			}
 		}
-		
+
 		JButton check = new JButton("check answers");
 		ActionListener listener = new ActionListener() {
-			  public void actionPerformed(ActionEvent e)
-			  {
-			    System.out.println(FinishedPuzzleChecker.checkFull(listOfFields));
-			  }
-			};
+			public void actionPerformed(ActionEvent e)
+			{
+				int[][] numbers = FinishedPuzzleChecker.getNumbers(listOfFields);
+				System.out.println(FinishedPuzzleChecker.checkValid1Through6(numbers));
+			}
+		};
 		check.addActionListener(listener);
 		check.setBounds(50*8/2 - buttonLength / 2, 50*8 - buttonHeight + 10, buttonLength, buttonHeight);
 		frame.add(check);
-		
+
 		frame.setVisible(true);
 		return listOfFields;
-		
+
 	}
-	
+
 	public static void main(String[] args) {
 		JTextField[][] list = GridDisplay.makeGridDisplay();
-		
+
 	}
-	
+
 }
 
