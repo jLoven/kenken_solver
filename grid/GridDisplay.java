@@ -1,8 +1,10 @@
 package grid;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,8 +12,8 @@ import javax.swing.JTextField;
 
 import solver.FinishedPuzzleChecker;
 
-public class GridDisplay {
-
+public class GridDisplay extends JFrame{
+	
 	//  Make 6 squares by 6 squares. must be colored in and contain text.
 	public static JTextField createTextBoxAt(JFrame frame, int xCorner, int yCorner, int xSize, int ySize, int fontSize) {
 		JTextField text = new JTextField();
@@ -19,7 +21,6 @@ public class GridDisplay {
 		Font font = new Font("SansSerif", Font.BOLD, fontSize);
 		text.setFont(font);
 		text.setHorizontalAlignment(JTextField.CENTER);
-
 		frame.add(text);
 		return text;
 	}
@@ -29,7 +30,7 @@ public class GridDisplay {
 		frame.setLocation(xCorner, yCorner);
 		frame.setSize(xSize, ySize);
 		frame.setLayout(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		return frame;
 	}
 
@@ -41,14 +42,15 @@ public class GridDisplay {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
 				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 20);
+				Color color = generateRandomColor(new Color(255,255,255));
+				field.setBackground(color);
 				listOfFields[i][j] = field;
 			}
 		}
 
 		JButton check = new JButton("check answers");
 		ActionListener listener = new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				int[][] numbers = FinishedPuzzleChecker.getNumbers(listOfFields);
 				System.out.println(FinishedPuzzleChecker.checkValid1Through6(numbers));
 			}
@@ -61,6 +63,24 @@ public class GridDisplay {
 		return listOfFields;
 
 	}
+	
+	public static Color generateRandomColor(Color mix) {
+	    Random random = new Random();
+	    int red = random.nextInt(256);
+	    int green = random.nextInt(256);
+	    int blue = random.nextInt(256);
+
+	    // mix the color
+	    if (mix != null) {
+	        red = (red + mix.getRed()) / 2;
+	        green = (green + mix.getGreen()) / 2;
+	        blue = (blue + mix.getBlue()) / 2;
+	    }
+
+	    Color color = new Color(red, green, blue);
+	    return color;
+	}
+
 
 	public static void main(String[] args) {
 		JTextField[][] list = GridDisplay.makeGridDisplay();
