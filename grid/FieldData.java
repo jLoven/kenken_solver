@@ -6,14 +6,13 @@ import javax.swing.JTextField;
 
 public class FieldData {
 
-	//  store info about which fields are connected
-	//  draw grid based on this
-	//  also each field should be its own class and store info about what can go in each field?
 	private JTextField field;
 	private Integer number;
 	private Location ownLocation;
 	private Color colorOfCollection;
-	private Location[] listOfConnectedFields;
+	private FieldData[] listOfConnectedFields;
+	private int connectedFieldGoal;
+	private String operation;
 	
 	public void setField(JTextField field) {
 		this.field = field;
@@ -52,16 +51,27 @@ public class FieldData {
 	}
 	
 	public void setColorOfCollection(Color color) {
-		this.colorOfCollection = color;
+		for (FieldData f : this.getListOfConnectedFields()) {
+			f.colorOfCollection = color;
+			f.getField().setBackground(color);
+		}
 	}
 	
-	public void setListOfConnectedFields(Location[] list) {
+	public void setListOfConnectedFields(FieldData[] list) {
 		this.listOfConnectedFields = list;
+		for (FieldData f : this.getListOfConnectedFields()) {
+			f.listOfConnectedFields = list;
+		}
 	}
 	
-	public Location[] getListOfConnectedFields() {
+	public FieldData[] getListOfConnectedFields() {
 		return this.listOfConnectedFields;
 	}
+	
+	public void setConnectedFieldGoal() {
+		
+	}
+	
 }
 
 class Location {

@@ -46,13 +46,19 @@ public class GridDisplay extends JFrame{
 				Color color = generateRandomColor(new Color(255,255,255));
 				field.setBackground(color);
 				Location location = new Location(i, j);
-				
 				fieldData.setField(field);
-				fieldData.setColorOfCollection(color);
 				fieldData.setLocation(location);
 				//  TODO:  Make a list of connected fields here
-				fieldData.setListOfConnectedFields(null);
-				
+				if (i == 1 && j == 1) {
+					FieldData[] listOfConnectedFields = {fieldData, listOfFields[0][1], listOfFields[1][0]};
+					fieldData.setListOfConnectedFields(listOfConnectedFields);
+					System.out.println(fieldData.getListOfConnectedFields().length + " here " + fieldData);
+				} else {
+					FieldData[] listOfConnectedFields = {fieldData};
+					fieldData.setListOfConnectedFields(listOfConnectedFields);
+					//System.out.println(fieldData.getListOfConnectedFields().length + " " + fieldData);
+				}
+				fieldData.setColorOfCollection(color);
 				listOfFields[i][j] = fieldData;
 			}
 		}
@@ -93,7 +99,6 @@ public class GridDisplay extends JFrame{
 
 	public static void main(String[] args) {
 		FieldData[][] list = GridDisplay.makeGridDisplay();
-
 	}
 
 }
