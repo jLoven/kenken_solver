@@ -34,17 +34,26 @@ public class GridDisplay extends JFrame{
 		return frame;
 	}
 
-	public static JTextField[][] makeGridDisplay() {
+	public static FieldData[][] makeGridDisplay() {
 		int buttonLength = 150;
 		int buttonHeight = 50;
 		JFrame frame = generateFrame(400, 200, 50*8, 50*9 + buttonHeight/2);
-		final JTextField[][] listOfFields = new JTextField[6][6];
+		final FieldData[][] listOfFields = new FieldData[6][6];
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
+				FieldData fieldData = new FieldData();
 				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 20);
 				Color color = generateRandomColor(new Color(255,255,255));
 				field.setBackground(color);
-				listOfFields[i][j] = field;
+				Location location = new Location(i, j);
+				
+				fieldData.setField(field);
+				fieldData.setColorOfCollection(color);
+				fieldData.setLocation(location);
+				//  TODO:  Make a list of connected fields here
+				fieldData.setListOfConnectedFields(null);
+				
+				listOfFields[i][j] = fieldData;
 			}
 		}
 
@@ -83,7 +92,7 @@ public class GridDisplay extends JFrame{
 
 
 	public static void main(String[] args) {
-		JTextField[][] list = GridDisplay.makeGridDisplay();
+		FieldData[][] list = GridDisplay.makeGridDisplay();
 
 	}
 

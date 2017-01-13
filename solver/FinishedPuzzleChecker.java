@@ -1,23 +1,18 @@
 package solver;
 
-import java.awt.Component;
-import java.util.ArrayList;
-import java.util.Arrays;
+import grid.FieldData;
 
-import javax.swing.JTextField;
+import java.util.Arrays;
 
 public class FinishedPuzzleChecker {
 	
-	public static int[][] getNumbers(JTextField[][] list) {
+	public static int[][] getNumbers(FieldData[][] list) {
 		int[][] numbers = new int[6][6];
 		for (int i = 0; i < list.length; i++) {
 			for (int j = 0; j < list.length; j++) {
-				String text = list[i][j].getText().trim();
-				if (text.length() == 1 && text.matches("[1-6]")) {
-					numbers[i][j] = Integer.parseInt(text);
-				} else {
-					System.out.println("invalid character at " + i + " " + j);
-				}
+				list[i][j].setNumberFromFieldData();
+				Integer number = list[i][j].getNumber();
+				numbers[i][j] = number;
 			}
 		}
 		return numbers;
