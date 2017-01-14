@@ -42,11 +42,11 @@ public class GridDisplay extends JFrame{
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
 				FieldData fieldData = new FieldData();
-				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 10);
+				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 20);
 				
 				Color color = generateRandomColor(new Color(255,255,255));
 				field.setBackground(color);
-				field.setUI(new JTextFieldWithHint("11+", Color.black));
+				//  field.setUI(new JTextFieldWithHint("11+", Color.black));
 				Location location = new Location(i, j);
 				fieldData.setField(field);
 				fieldData.setLocation(location);

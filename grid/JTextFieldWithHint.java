@@ -35,9 +35,9 @@ public class JTextFieldWithHint extends BasicTextFieldUI implements FocusListene
         super.paintSafely(g);
         // Render the hint text
         JTextComponent component = getComponent();
+        Font font = new Font("SansSerif", Font.BOLD, 10);
         if (component.getText().length() == 0 && !component.hasFocus()) {
             g.setColor(hintColor);
-            Font font = new Font("SansSerif", Font.BOLD, 10);
             component.setFont(font);
             g.drawString(hint, g.getClipBounds().x + 15, g.getClipBounds().y + 13);
         }
@@ -47,13 +47,11 @@ public class JTextFieldWithHint extends BasicTextFieldUI implements FocusListene
     	JTextComponent component = getComponent();
     	Font font = new Font("SansSerif", Font.BOLD, 20);
         component.setFont(font);
-        repaint();
+        //repaint();
     }
 
     public void focusLost(FocusEvent e) {
     	JTextComponent component = getComponent();
-    	//Font font = new Font("SansSerif", Font.BOLD, 20);
-    	//component.setFont(font);
         repaint();
     }
 
