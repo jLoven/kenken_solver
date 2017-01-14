@@ -42,21 +42,22 @@ public class GridDisplay extends JFrame{
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
 				FieldData fieldData = new FieldData();
-				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 20);
+				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 10);
+				
 				Color color = generateRandomColor(new Color(255,255,255));
 				field.setBackground(color);
+				field.setUI(new JTextFieldWithHint("11+", Color.black));
 				Location location = new Location(i, j);
 				fieldData.setField(field);
 				fieldData.setLocation(location);
-				//  TODO:  Make a list of connected fields here
+				//  TODO:  Make a list of connected fields here. this is all just a test
 				if (i == 1 && j == 1) {
 					FieldData[] listOfConnectedFields = {fieldData, listOfFields[0][1], listOfFields[1][0]};
 					fieldData.setListOfConnectedFields(listOfConnectedFields);
-					System.out.println(fieldData.getListOfConnectedFields().length + " here " + fieldData);
+					fieldData.setConnectedFieldGoal(1);
 				} else {
 					FieldData[] listOfConnectedFields = {fieldData};
 					fieldData.setListOfConnectedFields(listOfConnectedFields);
-					//System.out.println(fieldData.getListOfConnectedFields().length + " " + fieldData);
 				}
 				fieldData.setColorOfCollection(color);
 				listOfFields[i][j] = fieldData;

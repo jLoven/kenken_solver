@@ -51,6 +51,7 @@ public class FieldData {
 	}
 	
 	public void setColorOfCollection(Color color) {
+		//  TODO:  May be worth not resetting this every time you hit a new block in the collection.
 		for (FieldData f : this.getListOfConnectedFields()) {
 			f.colorOfCollection = color;
 			f.getField().setBackground(color);
@@ -68,9 +69,17 @@ public class FieldData {
 		return this.listOfConnectedFields;
 	}
 	
-	public void setConnectedFieldGoal() {
-		
+	public void setConnectedFieldGoal(int goal) {
+		for (FieldData f : this.getListOfConnectedFields()) {
+			f.connectedFieldGoal = goal;
+		}
 	}
+	
+	public int getConnectedFieldGoal() {
+		return this.connectedFieldGoal;
+	}
+	
+	
 	
 }
 
