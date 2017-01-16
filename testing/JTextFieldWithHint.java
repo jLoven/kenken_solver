@@ -1,4 +1,4 @@
-package grid;
+package testing;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,8 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.swing.text.JTextComponent;
-
-import testing.JTextFieldHintUI;
 
 public class JTextFieldWithHint extends BasicTextFieldUI implements FocusListener {  
     private String hint;

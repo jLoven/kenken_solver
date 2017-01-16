@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -33,34 +35,57 @@ public class GridDisplay extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		return frame;
 	}
+	
+	public static ArrayList<GroupOfFields> makeTempListOfConnectedFields() {
+		GroupOfFields group = new GroupOfFields();
+		ArrayList<GroupOfFields> listOfGroups = new ArrayList<GroupOfFields>();
+		Location[] locationList = new Location[3];
+		locationList[0] = new Location(0, 1);
+		locationList[1] = new Location(1, 1);
+		locationList[2] = new Location(1, 0);
+		group.setGroupedFields(locationList);
+		group.setColorOfCollection(ImageBackground.generateRandomColor(new Color(255, 255, 255)));
+		group.setGoal(12);
+		group.setOperation("add");
+		listOfGroups.add(group);
+		
+		//  for each other one, make a location list with just that
+		for (int i = 0; i < 36; i++) {
+			for (int j = 0; j < 36; j++) {
+				Location current = new Location(i, j);
+				if (!current.isInsideList(locationList)) {
+					GroupOfFields tempGroup = new GroupOfFields();
+					Location[] currentLocationList = {current};
+					tempGroup.setGroupedFields(currentLocationList);
+					Color color = ImageBackground.generateRandomColor(new Color(255,255,255));
+					tempGroup.setColorOfCollection(color);
+					int goal = 1 + (int)(Math.random() * ((100 - 1) + 1));
+					tempGroup.setGoal(goal);
+					tempGroup.setOperation(GroupOfFields.getRandomOperation());					
+					listOfGroups.add(tempGroup);
+				}
+			}
+		}
+		return listOfGroups;
+	}
 
 	public static FieldData[][] makeGridDisplay() {
 		int buttonLength = 150;
 		int buttonHeight = 50;
 		JFrame frame = generateFrame(400, 200, 50*8, 50*9 + buttonHeight/2);
 		final FieldData[][] listOfFields = new FieldData[6][6];
+		ArrayList<GroupOfFields> groupedLocations = makeTempListOfConnectedFields();
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
 				FieldData fieldData = new FieldData();
-				JTextField field = createTextBoxAt(frame, 50 + 50*i, 50 + 50*j, 50, 50, 20);
-				
-				Color color = generateRandomColor(new Color(255,255,255));
-				field.setBackground(color);
-				//  field.setUI(new JTextFieldWithHint("11+", Color.black));
-				Location location = new Location(i, j);
-				fieldData.setField(field);
-				fieldData.setLocation(location);
-				//  TODO:  Make a list of connected fields here. this is all just a test
-				if (i == 1 && j == 1) {
-					FieldData[] listOfConnectedFields = {fieldData, listOfFields[0][1], listOfFields[1][0]};
-					fieldData.setListOfConnectedFields(listOfConnectedFields);
-					fieldData.setConnectedFieldGoal(1);
-				} else {
-					FieldData[] listOfConnectedFields = {fieldData};
-					fieldData.setListOfConnectedFields(listOfConnectedFields);
-				}
-				fieldData.setColorOfCollection(color);
+				Location currentLocation = new Location(i, j);
+				fieldData.setLocation(currentLocation);
+				GroupOfFields group = GroupOfFields.getGroupGivenLocation(currentLocation, groupedLocations);
+				Color color = group.getColorOfCollection();
+				final BufferedImage image = ImageBackground.createImage(color, group.getGoalAndOperation());
+				JTextField field = ImageBackground.addNewLabelToFrame(frame, image, 50 + 50*i, 50 + 50*j, 50, 50);
 				listOfFields[i][j] = fieldData;
+				fieldData.setField(field);
 			}
 		}
 
@@ -80,24 +105,6 @@ public class GridDisplay extends JFrame{
 
 	}
 	
-	public static Color generateRandomColor(Color mix) {
-	    Random random = new Random();
-	    int red = random.nextInt(256);
-	    int green = random.nextInt(256);
-	    int blue = random.nextInt(256);
-
-	    // mix the color
-	    if (mix != null) {
-	        red = (red + mix.getRed()) / 2;
-	        green = (green + mix.getGreen()) / 2;
-	        blue = (blue + mix.getBlue()) / 2;
-	    }
-
-	    Color color = new Color(red, green, blue);
-	    return color;
-	}
-
-
 	public static void main(String[] args) {
 		FieldData[][] list = GridDisplay.makeGridDisplay();
 	}
