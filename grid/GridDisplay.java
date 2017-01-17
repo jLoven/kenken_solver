@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,6 +35,7 @@ public class GridDisplay extends JFrame{
 		return frame;
 	}
 	
+	//  Just for testing:
 	public static ArrayList<GroupOfFields> makeTempListOfConnectedFields() {
 		GroupOfFields group = new GroupOfFields();
 		ArrayList<GroupOfFields> listOfGroups = new ArrayList<GroupOfFields>();
@@ -69,12 +69,12 @@ public class GridDisplay extends JFrame{
 		return listOfGroups;
 	}
 
-	public static FieldData[][] makeGridDisplay() {
+	public static FieldData[][] makeGridDisplay(ArrayList<GroupOfFields> groupedLocations) {
 		int buttonLength = 150;
 		int buttonHeight = 50;
 		JFrame frame = generateFrame(400, 200, 50*8, 50*9 + buttonHeight/2);
 		final FieldData[][] listOfFields = new FieldData[6][6];
-		ArrayList<GroupOfFields> groupedLocations = makeTempListOfConnectedFields();
+		
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
 				FieldData fieldData = new FieldData();
@@ -106,7 +106,9 @@ public class GridDisplay extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		FieldData[][] list = GridDisplay.makeGridDisplay();
+		ArrayList<GroupOfFields> groupedLocations = makeTempListOfConnectedFields();
+		FieldData[][] list = GridDisplay.makeGridDisplay(groupedLocations);
+		
 	}
 
 }

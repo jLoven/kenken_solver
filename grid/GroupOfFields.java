@@ -49,6 +49,10 @@ public class GroupOfFields {
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}
+	
+	public String getOperation() {
+		return this.operation;
+	}
 
 	public String getGoalAndOperation() {
 		String s = this.goal + "";
@@ -71,5 +75,25 @@ public class GroupOfFields {
 		int i = new Random().nextInt(possibilities.length);
 		String random = (possibilities[i]);
 		return random;
+	}
+	
+	public static FieldData[] getFieldsInGroup(GroupOfFields group, FieldData[][] listOfFields) {
+		Location[] listOfLocations = group.getGroupedFields();
+		FieldData[] fieldsInGroup = new FieldData[listOfLocations.length];
+		//  need to get fields from these locations
+		for (int k = 0; k < listOfLocations.length; k++) {
+			Location l = listOfLocations[k];
+			outerLoop: for (int i = 0; i < listOfFields.length; i++) {
+				for (int j = 0; j < listOfFields.length; j++) {
+					FieldData field = listOfFields[i][j];
+					Location loc = field.getLocation();
+					if (loc.isEquivalentTo(l)) {
+						fieldsInGroup[k] = field;
+						break outerLoop;
+					}
+				}
+			}
+		}
+		return fieldsInGroup;
 	}
 }
