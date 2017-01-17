@@ -58,7 +58,7 @@ public class Solver {
 			if (GroupChecker.isValidNumber((int) divide)) {
 				possibleFillers.add((int) divide);
 			}
-			if (GroupChecker.isValidNumber(multiply)) {
+			if (GroupChecker.isValidNumber(multiply) && !possibleFillers.contains(multiply)) {
 				possibleFillers.add(multiply);
 			};
 			break;
