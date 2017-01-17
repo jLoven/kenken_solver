@@ -17,7 +17,6 @@ public class TempGrid {
 		group.setOperation(operation);
 		listOfGroups.add(group);
 	}
-
 	
 	public static ArrayList<GroupOfFields> makeTempListOfConnectedFields() {
 		ArrayList<GroupOfFields> listOfGroups = new ArrayList<GroupOfFields>();
@@ -77,6 +76,5 @@ public class TempGrid {
 		addGroup(locationList18, 10, GroupOfFields.MULTIPLY, listOfGroups);
 		
 		return listOfGroups;
-	}
-	
+	}	
 }

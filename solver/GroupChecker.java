@@ -6,17 +6,47 @@ import grid.GroupOfFields;
 import java.util.ArrayList;
 
 public class GroupChecker {
-
-	public static boolean isGroupFull(FieldData[] fields) {
+	
+	public static boolean isValidNumber(int number) {
 		ArrayList<Integer> valid = new ArrayList<Integer>();
 		valid.add(1); valid.add(2); valid.add(3); valid.add(4); valid.add(5); valid.add(6);
+		if (!valid.contains(number)) {
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean isFieldNumberValid(FieldData field) {
+		field.setNumberFromFieldData();
+		int number = field.getNumber();
+		if (!isValidNumber(number)) {
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean isGroupFull(FieldData[] fields) {
 		for (FieldData f : fields) {
-			f.setNumberFromFieldData();
-			if (!valid.contains(f.getNumber())) {
+			if (!isFieldNumberValid(f)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public static FieldData hasOneLeft(FieldData[] fieldList) {
+		int count = 0;
+		FieldData remainder = null;
+		for (FieldData f : fieldList) {
+			if (!isFieldNumberValid(f)) {
+				count++;
+				remainder = f;
+			}
+		}
+		if (count == 1) {
+			return remainder;
+		}
+		return null;
 	}
 
 	public static boolean checkGroupValidity(FieldData[][] listOfFields, GroupOfFields group) {

@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import solver.GroupChecker;
+import solver.Solver;
 import testing.TempGrid;
 
 public class GridDisplay extends JFrame{
@@ -41,7 +42,7 @@ public class GridDisplay extends JFrame{
 	public static FieldData[][] makeGridDisplay(final ArrayList<GroupOfFields> groupedLocations) {
 		int buttonLength = 150;
 		int buttonHeight = 50;
-		JFrame frame = generateFrame(400, 200, 50*8, 50*9 + buttonHeight/2);
+		JFrame frame = generateFrame(400, 200, 50*8, 50*9 + buttonHeight/2 + 20);
 		final FieldData[][] listOfFields = new FieldData[6][6];
 		
 		for (int i = 0; i < 6; i++) {
@@ -64,6 +65,10 @@ public class GridDisplay extends JFrame{
 				for (GroupOfFields group : groupedLocations) {
 					boolean b = GroupChecker.checkGroupValidity(listOfFields, group);
 					System.out.println("group with " + group.getGoalAndOperation() + " is " + b);
+					FieldData[] fieldList = GroupOfFields.getFieldsInGroup(group, listOfFields);
+					if (GroupChecker.hasOneLeft(fieldList) != null) {
+						Solver.fillInLastItemOfGroup(fieldList, group);
+					}
 				}
 				
 				//int[][] numbers = FinishedPuzzleChecker.getNumbers(listOfFields);
@@ -73,6 +78,21 @@ public class GridDisplay extends JFrame{
 		check.addActionListener(listener);
 		check.setBounds(50*8/2 - buttonLength / 2, 50*8 - buttonHeight + 10, buttonLength, buttonHeight);
 		frame.add(check);
+		
+		JButton clear = new JButton("clear answers");
+		ActionListener listener1 = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < listOfFields.length; i++) {
+					for (int j = 0; j < listOfFields.length; j++) {
+						FieldData field = listOfFields[i][j];
+						field.getField().setText("");
+					}
+				}
+			}
+		};
+		clear.addActionListener(listener1);
+		clear.setBounds(50*8/2 - buttonLength / 2, 50*8 + 10, buttonLength, buttonHeight);
+		frame.add(clear);
 
 		frame.setVisible(true);
 		return listOfFields;
