@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GroupOfFields {
+	
+	public static final String DIVIDE = "divide";
+	public static final String MULTIPLY = "multiply";
+	public static final String ADD = "add";
+	public static final String SUBTRACT = "subtract";
+	public static final String NONE = "none";
 
 	private Location[] groupedFields;
 	private Color colorOfCollection = null;
@@ -57,15 +63,15 @@ public class GroupOfFields {
 	public String getGoalAndOperation() {
 		String s = this.goal + "";
 		switch(this.operation) {
-		case "add": s = s + "\u002B";
+		case ADD: s = s + "\u002B";
 		break;
-		case "subtract": s = s + "\uFE63";
+		case SUBTRACT: s = s + "\uFE63";
 		break;
-		case "divide": s = s + "\u00F7";
+		case DIVIDE: s = s + "\u00F7";
 		break;
-		case "multiply": s = s + "\u00D7";
+		case MULTIPLY: s = s + "\u00D7";
 		break;
-		case "none": s = s + "";
+		case NONE: s = s + "";
 		break;
 		}
 		return s;
@@ -73,7 +79,7 @@ public class GroupOfFields {
 	
 	//  Just for testing:
 	public static String getRandomOperation() {
-		String[] possibilities = {"add", "subtract", "multiply", "divide"};
+		String[] possibilities = {ADD, SUBTRACT, MULTIPLY, DIVIDE};
 		int i = new Random().nextInt(possibilities.length);
 		String random = (possibilities[i]);
 		return random;

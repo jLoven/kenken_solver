@@ -11,8 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import solver.FinishedPuzzleChecker;
 import solver.GroupChecker;
+import testing.TempGrid;
 
 public class GridDisplay extends JFrame{
 	
@@ -36,48 +36,7 @@ public class GridDisplay extends JFrame{
 		return frame;
 	}
 	
-	//  Just for testing:
-	public static ArrayList<GroupOfFields> makeTempListOfConnectedFields() {
-		ArrayList<GroupOfFields> listOfGroups = new ArrayList<GroupOfFields>();
-		GroupOfFields group = new GroupOfFields();
-		Location[] locationList = new Location[3];
-		locationList[0] = new Location(0, 1);
-		locationList[1] = new Location(1, 1);
-		locationList[2] = new Location(1, 0);
-		group.setGroupedFields(locationList);
-		group.setColorOfCollection(ImageBackground.generateRandomColor(new Color(255, 255, 255)));
-		group.setGoal(12);
-		group.setOperation("add");
-		listOfGroups.add(group);
-		
-		GroupOfFields group2 = new GroupOfFields();
-		Location[] locationList2 = new Location[1];
-		locationList2[0] = new Location(0, 0);
-		group2.setGroupedFields(locationList2);
-		group2.setColorOfCollection(ImageBackground.generateRandomColor(new Color(255, 255, 255)));
-		group2.setGoal(6);
-		group2.setOperation("none");
-		listOfGroups.add(group2);
-		
-		//  for each other one, make a location list with just that
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 6; j++) {
-				Location current = new Location(i, j);
-				if (!current.isInsideList(locationList)) {
-					GroupOfFields tempGroup = new GroupOfFields();
-					Location[] currentLocationList = {current};
-					tempGroup.setGroupedFields(currentLocationList);
-					Color color = ImageBackground.generateRandomColor(new Color(255,255,255));
-					tempGroup.setColorOfCollection(color);
-					int goal = 1 + (int)(Math.random() * ((100 - 1) + 1));
-					tempGroup.setGoal(goal);
-					tempGroup.setOperation(GroupOfFields.getRandomOperation());					
-					listOfGroups.add(tempGroup);
-				}
-			}
-		}
-		return listOfGroups;
-	}
+	
 
 	public static FieldData[][] makeGridDisplay(final ArrayList<GroupOfFields> groupedLocations) {
 		int buttonLength = 150;
@@ -121,7 +80,7 @@ public class GridDisplay extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		ArrayList<GroupOfFields> groupedLocations = makeTempListOfConnectedFields();
+		ArrayList<GroupOfFields> groupedLocations = TempGrid.makeTempListOfConnectedFields();
 		FieldData[][] list = GridDisplay.makeGridDisplay(groupedLocations);
 		
 	}

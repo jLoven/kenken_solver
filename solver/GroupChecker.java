@@ -24,12 +24,12 @@ public class GroupChecker {
 		String operation = group.getOperation();
 		FieldData[] fields = GroupOfFields.getFieldsInGroup(group, listOfFields);
 		if (isGroupFull(fields)) {
-			if (operation.equalsIgnoreCase("divide") || operation.equalsIgnoreCase("subtract")) {
+			if (operation.equalsIgnoreCase(GroupOfFields.DIVIDE) || operation.equalsIgnoreCase(GroupOfFields.SUBTRACT)) {
 				double first = (double) fields[0].getNumber();
 				double second = (double) fields[1].getNumber();
 				boolean a = false;
 				boolean b = false;
-				if (operation.equalsIgnoreCase("divide")) {
+				if (operation.equalsIgnoreCase(GroupOfFields.DIVIDE)) {
 					a = first / second == (double) goal;
 					b = second / first == (double) goal;
 				} else {
@@ -41,14 +41,14 @@ public class GroupChecker {
 				} else {
 					return false;
 				}
-			} else if (operation.equalsIgnoreCase("add") || operation.equalsIgnoreCase("multiply")) {
+			} else if (operation.equalsIgnoreCase(GroupOfFields.ADD) || operation.equalsIgnoreCase(GroupOfFields.MULTIPLY)) {
 				int i = 0;
-				if (operation.equalsIgnoreCase("multiply")) {
+				if (operation.equalsIgnoreCase(GroupOfFields.MULTIPLY)) {
 					i = 1;
 				}
 				for (FieldData f : fields) {
 					int current = f.getNumber();
-					if (operation.equalsIgnoreCase("add")) {
+					if (operation.equalsIgnoreCase(GroupOfFields.ADD)) {
 						i = i + current;
 					} else {
 						i = i * current;
@@ -59,7 +59,7 @@ public class GroupChecker {
 				} else {
 					return false;
 				}
-			} else if (operation.equalsIgnoreCase("none")) {
+			} else if (operation.equalsIgnoreCase(GroupOfFields.NONE)) {
 				if (fields[0].getNumber() == goal) {
 					return true;
 				} else {
