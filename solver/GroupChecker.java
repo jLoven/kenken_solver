@@ -59,6 +59,12 @@ public class GroupChecker {
 				} else {
 					return false;
 				}
+			} else if (operation.equalsIgnoreCase("none")) {
+				if (fields[0].getNumber() == goal) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 		return false;

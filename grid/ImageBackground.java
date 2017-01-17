@@ -59,24 +59,4 @@ public class ImageBackground {
 		frame.add(label);
 		return field;
 	}
-
-	public static void main(String arg[]) throws IOException {
-		JFrame frame = new JFrame();
-		frame.setLocation(400, 200);
-		frame.setSize(50*8, 50*9);
-		frame.setLayout(null);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-    	final BufferedImage image = createImage(new Color(255, 50, 255), "13-");
-    	final BufferedImage image2 = createImage(new Color(255, 50, 144), "4+");
-    	
-    	JTextField field = addNewLabelToFrame(frame, image, 50, 50, 50, 50);
-    	
-    	addNewLabelToFrame(frame, image2, 50 + 50, 50 + 50, 50, 50);
-   
-    	JButton check = new JButton("check answers");
-    	check.setBounds(50*8/2 - 150 / 2, 50*8 - 50 + 10, 150, 50);
-    	frame.add(check);
-    	frame.setVisible(true);
-	}
 }

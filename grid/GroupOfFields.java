@@ -65,6 +65,8 @@ public class GroupOfFields {
 		break;
 		case "multiply": s = s + "\u00D7";
 		break;
+		case "none": s = s + "";
+		break;
 		}
 		return s;
 	}

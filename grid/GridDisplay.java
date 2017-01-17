@@ -38,8 +38,8 @@ public class GridDisplay extends JFrame{
 	
 	//  Just for testing:
 	public static ArrayList<GroupOfFields> makeTempListOfConnectedFields() {
-		GroupOfFields group = new GroupOfFields();
 		ArrayList<GroupOfFields> listOfGroups = new ArrayList<GroupOfFields>();
+		GroupOfFields group = new GroupOfFields();
 		Location[] locationList = new Location[3];
 		locationList[0] = new Location(0, 1);
 		locationList[1] = new Location(1, 1);
@@ -49,6 +49,15 @@ public class GridDisplay extends JFrame{
 		group.setGoal(12);
 		group.setOperation("add");
 		listOfGroups.add(group);
+		
+		GroupOfFields group2 = new GroupOfFields();
+		Location[] locationList2 = new Location[1];
+		locationList2[0] = new Location(0, 0);
+		group2.setGroupedFields(locationList2);
+		group2.setColorOfCollection(ImageBackground.generateRandomColor(new Color(255, 255, 255)));
+		group2.setGoal(6);
+		group2.setOperation("none");
+		listOfGroups.add(group2);
 		
 		//  for each other one, make a location list with just that
 		for (int i = 0; i < 6; i++) {
