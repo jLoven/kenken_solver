@@ -34,15 +34,6 @@ public class FinishedPuzzleChecker {
 		return Arrays.asList(array).containsAll(Arrays.asList(valids));
 	}
 	
-	/*public static Integer[] toObject(int[] intArray) {
-
-		Integer[] result = new Integer[intArray.length];
-		for (int i = 0; i < intArray.length; i++) {
-			result[i] = Integer.valueOf(intArray[i]);
-		}
-		return result;
-	}*/
-	
 	public static Integer[] getColumn(int[][] array, boolean isRow, int index) {
 		Integer[] finalArray = new Integer[array.length];
 		if (isRow) {
@@ -70,10 +61,5 @@ public class FinishedPuzzleChecker {
 		} else {
 			return false;
 		}
-	}
-	
-	public static void main(String[] args) {
-		final Integer[] valids = {1, 3, 2, 4, 5, 6};
-		System.out.println(contains1Through6(valids));
 	}
 }

@@ -32,7 +32,7 @@ public class FieldData {
 			this.setNumber(number);
 		} else {
 			this.setNumber(0);
-			System.out.println("invalid character at " + this.getLocation().getI() + " " + this.getLocation().getJ());
+			//System.out.println("invalid character at " + this.getLocation().getI() + " " + this.getLocation().getJ());
 		}
 	}
 
