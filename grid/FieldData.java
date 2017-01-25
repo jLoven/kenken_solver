@@ -1,5 +1,7 @@
 package grid;
 
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 
 public class FieldData {
@@ -7,6 +9,7 @@ public class FieldData {
 	private JTextField field;
 	private Integer number;
 	private Location ownLocation;
+	private ArrayList<Integer> possibilities;
 
 	public void setField(JTextField field) {
 		this.field = field;
@@ -42,5 +45,13 @@ public class FieldData {
 
 	public Location getLocation() {
 		return this.ownLocation;
+	}
+	
+	public void setPossibilities(ArrayList<Integer> array) {
+		this.possibilities = array;
+	}
+	
+	public ArrayList<Integer> getPossibilities() {
+		return this.possibilities;
 	}
 }

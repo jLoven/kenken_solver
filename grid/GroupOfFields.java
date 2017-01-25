@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GroupOfFields {
-	
+
 	public static final String DIVIDE = "divide";
 	public static final String MULTIPLY = "multiply";
 	public static final String ADD = "add";
@@ -16,7 +16,7 @@ public class GroupOfFields {
 	private Color colorOfCollection = null;
 	private int goal;
 	private String operation;
-	
+
 	public static GroupOfFields getGroupGivenLocation(Location location, ArrayList<GroupOfFields> arrayOfGroups) {
 		for (GroupOfFields g : arrayOfGroups) {
 			Location[] currentLocationList = g.getGroupedFields();
@@ -27,11 +27,11 @@ public class GroupOfFields {
 		System.out.println("Something went wrong in GroupOfFields");
 		return null;
 	}
-	
+
 	public void setGroupedFields(Location[] locationList) {
 		this.groupedFields = locationList;
 	}
-	
+
 	public Location[] getGroupedFields() {
 		return this.groupedFields;
 	}
@@ -55,7 +55,7 @@ public class GroupOfFields {
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}
-	
+
 	public String getOperation() {
 		return this.operation;
 	}
@@ -76,7 +76,7 @@ public class GroupOfFields {
 		}
 		return s;
 	}
-	
+
 	//  Just for testing:
 	public static String getRandomOperation() {
 		String[] possibilities = {ADD, SUBTRACT, MULTIPLY, DIVIDE};
@@ -84,7 +84,7 @@ public class GroupOfFields {
 		String random = (possibilities[i]);
 		return random;
 	}
-	
+
 	public static FieldData[] getFieldsInGroup(GroupOfFields group, FieldData[][] listOfFields) {
 		Location[] listOfLocations = group.getGroupedFields();
 		FieldData[] fieldsInGroup = new FieldData[listOfLocations.length];
